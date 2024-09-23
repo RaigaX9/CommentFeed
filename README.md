@@ -63,10 +63,12 @@ We recommend spending up to four hours on this assignment. If you don't get ever
 - npm: 10.7.0
 
 ### Run in Development
-
-
-
 ```
 $ npm install
 $ npm run dev
+```
+
+### Run Tests
+```
+$ npm run test
 ```
