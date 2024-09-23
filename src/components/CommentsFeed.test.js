@@ -73,16 +73,16 @@ describe('CommentsFeed Component', () => {
         });
     });
 
-    // Commented this out since the delete button is commented as well. Again for testing purposes.
-    // test('should handle deletion of all comments', async () => {
-    //     render(<CommentsFeed />);
-    //     fireEvent.click(screen.getByRole('button', { name: /Delete All Comments/i }));
-    //
-    //     expect(screen.getByText(/Are you sure you want to delete all the comments?/i)).toBeInTheDocument();
-    //
-    //     fireEvent.click(screen.getByText(/Yes/i));
-    //     await waitFor(() => expect(screen.getByText(/All comments deleted successfully!/i)).toBeInTheDocument());
-    // });
+
+    test('should handle deletion of all comments', async () => {
+        render(<CommentsFeed />);
+        fireEvent.click(screen.getByRole('button', { name: /Delete All Comments/i }));
+
+        expect(screen.getByText(/Are you sure you want to delete all the comments?/i)).toBeInTheDocument();
+
+        fireEvent.click(screen.getByText(/Yes/i));
+        await waitFor(() => expect(screen.getByText(/All comments deleted successfully!/i)).toBeInTheDocument());
+    });
 
     test('should handle empty WebSocket messages gracefully', async () => {
         render(<CommentsFeed />);

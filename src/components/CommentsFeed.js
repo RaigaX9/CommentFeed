@@ -128,38 +128,36 @@ const CommentsFeed = () => {
         }
     };
 
-    // Commented it out as delete functionality is for testing purposes only.
-    // const handleDeleteComments = async () => {
-    //     try {
-    //         const res = await fetch('http://localhost:3001/api/deleteComments', {
-    //             method: 'DELETE',
-    //         });
-    //         if (!res.ok) {
-    //             throw new Error('Failed to delete comments');
-    //         }
-    //         setComments([]);
-    //         showAlert('All comments deleted successfully!', 'success');
-    //     } catch (error) {
-    //         console.error('Error deleting comments:', error);
-    //         showAlert('Failed to delete comments. Please try again.', 'error');
-    //     }
-    // };
+    const handleDeleteComments = async () => {
+        try {
+            const res = await fetch('http://localhost:3001/api/deleteComments', {
+                method: 'DELETE',
+            });
+            if (!res.ok) {
+                throw new Error('Failed to delete comments');
+            }
+            setComments([]);
+            showAlert('All comments deleted successfully!', 'success');
+        } catch (error) {
+            console.error('Error deleting comments:', error);
+            showAlert('Failed to delete comments. Please try again.', 'error');
+        }
+    };
 
     return (
         <div className="comments-feed-container">
             <ToastNotifications />
             <Alert message={alertMessage} type={alertType} />
             <CommentForm onSubmit={handleSubmit} name={name} setName={setName} message={message} setMessage={setMessage} />
-            {/*Delete button functionality included for testing purposes only. Commented out to prevent accidental data loss.*/}
-            {/*<DeleteButton onClick={() => setIsModalOpen(true)} />*/}
-            {/*<DeleteModal*/}
-            {/*    isOpen={isModalOpen}*/}
-            {/*    onClose={() => setIsModalOpen(false)}*/}
-            {/*    onConfirm={() => {*/}
-            {/*        handleDeleteComments();*/}
-            {/*        setIsModalOpen(false);*/}
-            {/*    }}*/}
-            {/*/>*/}
+            <DeleteButton onClick={() => setIsModalOpen(true)} />
+            <DeleteModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onConfirm={() => {
+                    handleDeleteComments();
+                    setIsModalOpen(false);
+                }}
+            />
             <CommentList comments={comments} />
         </div>
     );
